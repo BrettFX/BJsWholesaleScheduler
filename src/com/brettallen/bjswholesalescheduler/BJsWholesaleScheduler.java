@@ -41,7 +41,7 @@ public class BJsWholesaleScheduler
     public static final InputStream BACKUP_EMAIL_FILE = BJsWholesaleScheduler.class.getResourceAsStream("res/emails.txt");
 
     //Front-line schedule template
-    private static final String FRONT_LINE_TEMPLATE = "res/frontLineTemplate01.xls";
+    private static final String FRONT_LINE_TEMPLATE = "res/frontLineTemplate02.xls";
     private static final String CASHIER_TEMPLATE = "res/cashierTemplate.xls";
     private static final String OVERNIGHT_TEMPLATE = "res/overnightTemplate.xls";
 
@@ -380,9 +380,8 @@ public class BJsWholesaleScheduler
                             }
                         }
                     }
-                    catch(ArrayIndexOutOfBoundsException e1)
-                    {
-                        //TODO HANDLE ArrayIndexOutOfBoundsException
+                    catch(ArrayIndexOutOfBoundsException e1){
+                        e1.printStackTrace();
                     }
                 }
             }
@@ -725,6 +724,9 @@ public class BJsWholesaleScheduler
 
         displayFrontLineShifts("Ticketer", day, myArray, rows, cols, frontLineSchedule);
 
+        //TODO: Need to make this work with stock clerk
+        //displayFrontLineShifts("Stock Clerk", day, myArray, rows, cols, frontLineSchedule);
+
         displayFrontLineShifts("Tire", day, myArray, rows, cols, frontLineSchedule);
 
         displayFrontLineShifts("Maintenance", day, myArray, rows, cols, frontLineSchedule);
@@ -738,8 +740,6 @@ public class BJsWholesaleScheduler
         displayFrontLineShifts("Meat", day, myArray, rows, cols, frontLineSchedule);
 
         displayFrontLineShifts("Produce", day, myArray, rows, cols, frontLineSchedule);
-
-        displayFrontLineShifts("Jewelry", day, myArray, rows, cols, frontLineSchedule);
     }
 
     private static void displayCashierSchedule(String day, Shift[][] myArray, int rows, int cols,
@@ -841,6 +841,8 @@ public class BJsWholesaleScheduler
     private static void displayFrontLineShifts(String position, String day, Shift[][] myArray, int rows,
                                                int cols, ExcelWriter frontLineSchedule) throws WriteException
     {
+        final int offset = 6; //6
+
         int excelCol = 0,
                 excelRow = 0,
                 initRow;
@@ -855,6 +857,9 @@ public class BJsWholesaleScheduler
                         && myArray[x][y].position.contains(position)
                         && getMilitaryTime(myArray[x][y].endTime) > 900)
                 {
+                    boolean recovery = myArray[x][y].position.contains("Recovery") || myArray[x][y].position.contains("Ticketer") ||
+                            myArray[x][y].position.contains("Stock Clerk");
+
                     //Implementing switch logic for jre compliance level 1.6
                     if(myArray[x][y].position.contains("Supv"))
                     {
@@ -890,28 +895,28 @@ public class BJsWholesaleScheduler
                         excelCol = 0;
                         excelRow = 36; //36
                     }
-                    else if(myArray[x][y].position.contains("Recovery") || myArray[x][y].position.contains("Ticketer"))
+                    else if(recovery)
                     {
-                        //Start at cell G5
+                        //Start at cell G29
                         excelCol = 6;
-                        excelRow = 4;
+                        excelRow = 28; //28
                     }
                     else if(myArray[x][y].position.contains("Tire"))
                     {
-                        //Start at cell G21
+                        //Start at cell G13
                         excelCol = 6;
                         excelRow = 12; //20
                     }
                     else if(myArray[x][y].position.contains("Maintenance"))
                     {
-                        //Start at cell G29
+                        //Start at cell G5
                         excelCol = 6;
-                        excelRow = 20; //28
+                        excelRow = 4;
                     }
-                    else if(myArray[x][y].position.contains("Deli")) //Going to have to handle overflow for Deli department
+                    else if(myArray[x][y].position.contains("Deli"))
                     {
-                        //Start at cell G37
-                        excelCol = 6;
+                        //Start at cell M29
+                        excelCol = 12; //6
                         excelRow = 28; //36
                     }
                     else if(myArray[x][y].position.contains("Baker"))
@@ -934,22 +939,16 @@ public class BJsWholesaleScheduler
                     }
                     else if(myArray[x][y].position.contains("Produce"))
                     {
-                        //Start at cell M29
-                        excelCol = 12;
-                        excelRow = 28; //28
-                    }
-                    else if(myArray[x][y].position.contains("Jewelry"))
-                    {
-                        //Start at cell M37
-                        excelCol = 12;
-                        excelRow = 36; //36
+                        //Start at cell G21
+                        excelCol = 6; //12
+                        excelRow = 20; //28
                     }
                     //End switch
 
                     initRow = excelRow;
 
                     //Traverse excel template and fill name and time only if there is not already a name and time there
-                    while(excelRow < initRow + 6) //Originally initRow + 6
+                    while(excelRow < initRow + offset || recovery) //Originally initRow + 6
                     {
                         if(frontLineSchedule.isEmptyCell(excelCol, excelRow))
                         {
@@ -971,9 +970,8 @@ public class BJsWholesaleScheduler
 
                     //If the current excelRow is greater than the initial value of excelRow plus six, insert a row and place
                     //the employee in the newly inserted row
-                    if(excelRow >= initRow + 6) //Originally initRow + 6
+                    if(excelRow >= initRow + offset && !recovery) //Originally initRow + 6
                     {
-                        //Insert a new row
                         frontLineSchedule.insertRow(excelRow);
 
                         //Write the employees name to the ExcelWriter
@@ -1167,15 +1165,15 @@ public class BJsWholesaleScheduler
             {
                 if(militaryTime < 1200)
                     return militaryTime + 1200;
-                else
-                    return militaryTime;
+
+                return militaryTime;
             }
             else
             {
                 if(militaryTime < 1200)
                     return militaryTime;
-                else
-                    return militaryTime - 1200;
+
+                return militaryTime - 1200;
             }
         }
     }
