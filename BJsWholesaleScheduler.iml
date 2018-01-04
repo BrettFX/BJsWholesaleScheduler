@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Libraries/Java/javax.mail.jar!/" />
+          <root url="jar://$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/javax.mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Libraries/Java/JTattoo-1.6.11.jar!/" />
+          <root url="jar://$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/JTattoo-1.6.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Libraries/Java/jexcelapi_2_6_12/jexcelapi/jxl.jar!/" />
+          <root url="jar://$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/jexcelapi_2_6_12/jexcelapi/jxl.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-3.13-20150929.jar!/" />
+          <root url="jar://$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-3.13-20150929.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +46,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-ooxml-3.13-20150929.jar!/" />
+          <root url="jar://$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-ooxml-3.13-20150929.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

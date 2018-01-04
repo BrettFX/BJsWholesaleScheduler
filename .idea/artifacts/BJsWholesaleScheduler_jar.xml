@@ -3,11 +3,11 @@
     <output-path>$PROJECT_DIR$/out/artifacts/BJsWholesaleScheduler_jar</output-path>
     <root id="archive" name="BJsWholesaleScheduler.jar">
       <element id="module-output" name="BJsWholesaleScheduler" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/Java/jexcelapi_2_6_12/jexcelapi/jxl.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-3.13-20150929.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/Java/javax.mail.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/Java/JTattoo-1.6.11.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-ooxml-3.13-20150929.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/JTattoo-1.6.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/jexcelapi_2_6_12/jexcelapi/jxl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-3.13-20150929.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Google Drive/Documents/Programming/Libraries/Java/poi-bin-3.13-20150929/poi-3.13/poi-ooxml-3.13-20150929.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
