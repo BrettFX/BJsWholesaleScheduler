@@ -1,4 +1,4 @@
-#BJsWholesaleScheduler#
+# BJsWholesaleScheduler
 
 A program that takes an excel file in as input, converts it to a comma separated format, and parses through it to extrapolate necessary data required to create a well-formatted employee schedule for the member service supervisors at BJ's Wholesale Club.
 
