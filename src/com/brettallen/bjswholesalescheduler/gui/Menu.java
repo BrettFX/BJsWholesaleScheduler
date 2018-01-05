@@ -30,7 +30,7 @@ import jxl.write.biff.RowsExceededException;
 public class Menu extends JFrame implements ActionListener
 {
     private static final long serialVersionUID = 1L;
-    private static final String VERSION = "4.5.7 (Beta v2)";
+    private static final String VERSION = "4.5.8";
 
     //Toggle this on for a better debugging experience (Don't have to open a file to test button events)
     private static final boolean DEBUG = false;
@@ -1418,6 +1418,10 @@ public class Menu extends JFrame implements ActionListener
             });
             rdbtnEmailAsPDF.setFont(new Font("Consolas", Font.PLAIN, 11));
             rdbtnEmailAsPDF.setBounds(229, 294, 300, 23); //10, 294, 209, 23
+
+            //Keep disabled and invisible until fully implemented
+            rdbtnEmailAsPDF.setEnabled(false);
+            rdbtnEmailAsPDF.setVisible(false);
             panel.add(rdbtnEmailAsPDF);
 
             rdbtnEmailAsPic = new JRadioButton("Send Schedule as Picture Format and PDF Format");
