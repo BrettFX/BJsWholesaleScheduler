@@ -16,7 +16,7 @@ public class Shift
 	private EmployeeType employeeType = EmployeeType.NON_MANAGER;
 
 	public final String employee;
-	public final String position;
+	public String position;
 	public final String startTime;
 	public final String endTime;
 	public String day;
@@ -114,7 +114,7 @@ public class Shift
 	{
 		return separator;
 	}
-	
+
 	public String getShiftTime()
 	{
 	    //Simply return the start time if the employee has a special shift

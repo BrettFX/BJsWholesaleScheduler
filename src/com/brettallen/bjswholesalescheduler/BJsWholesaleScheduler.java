@@ -503,7 +503,11 @@ public class BJsWholesaleScheduler
         }
 
         System.out.println("Done.");
-        menu.print("\nSorted in ascending order.\n");
+
+        if(menu != null){
+            menu.print("\nSorted in ascending order.\n");
+        }
+
     }
 
     //Chronologically sorting schedule
@@ -720,12 +724,44 @@ public class BJsWholesaleScheduler
 
         displayFrontLineShifts("Stock/Cart Retriever", day, myArray, rows, cols, frontLineSchedule);
 
-        displayFrontLineShifts("Recovery", day, myArray, rows, cols, frontLineSchedule);
+        //Special case with recovery
+        //Need to create a temporary partition of the schedule that includes a conglomeration of the shifts
+        //That qualify as recovery shifts and then sort them so that they can be displayed in proper order
+        //In a consolidated Recovery section of the Frontline schedule
+        Shift[][] recoveryPartition = new Shift[rows][cols];
 
-        displayFrontLineShifts("Ticketer", day, myArray, rows, cols, frontLineSchedule);
+        for(int x = 0; x < rows; x++) {
+            for (int y = 0; y < cols; y++) {
+               if(myArray[x][y] != null){
+                   boolean validRecoveryPos = myArray[x][y].position.contains("Stock Clerk") ||
+                           myArray[x][y].position.contains("Ticketer") ||
+                           myArray[x][y].position.contains("Recovery");
 
-        //TODO: Need to make this work with stock clerk
-        //displayFrontLineShifts("Stock Clerk", day, myArray, rows, cols, frontLineSchedule);
+                   if(myArray[x][y].day.equals(day) && validRecoveryPos && getMilitaryTime(myArray[x][y].endTime) > 900) {
+                       Shift moddedShift = myArray[x][y];
+
+                       //Mod a copy of the shift to be recovery so that we only have to search for recovery in the next step
+                       moddedShift.position = "Recovery";
+                       recoveryPartition[x][y] = moddedShift;
+                   }
+               }
+            }
+        }
+
+        //Sort qualifying recovery shifts
+        try {
+            sortAscending(recoveryPartition, rows, null);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+
+//        displayFrontLineShifts("Stock Clerk", day, recoveryPartition, rows, cols, frontLineSchedule);
+//
+//        displayFrontLineShifts("Ticketer", day, recoveryPartition, rows, cols, frontLineSchedule);
+
+        displayFrontLineShifts("Recovery", day, recoveryPartition, rows, cols, frontLineSchedule);
+
+        //End special case
 
         displayFrontLineShifts("Tire", day, myArray, rows, cols, frontLineSchedule);
 
