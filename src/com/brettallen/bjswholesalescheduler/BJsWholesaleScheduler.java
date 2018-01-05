@@ -319,15 +319,18 @@ public class BJsWholesaleScheduler
                     //Determine if the there is a second portion of the current employee's shift
                     try
                     {
+                        String[] split1 = csv[i + 3].split(",");
+                        String[] split2 = csv[i + 4].split(",");
                         //Determine plausible second shift
-                        if(!csv[i + 3].split(",")[j].equals(".") &&
-                                !startsWithNumber(csv[i + 3].split(",")[j]) &&
-                                !csv[i + 3].startsWith("\""))
-                        {
-                            multiplier = true;
+                        if(j < split1.length && j < split2.length){
+                            if(!split1[j].equals(".") &&
+                                    !startsWithNumber(split1[j]) &&
+                                    !csv[i + 3].startsWith("\""))
+                            {
+                                multiplier = true;
 
-                            shiftPosition2 = csv[i + 3].split(",")[j];
-                            shiftTime2 = csv[i + 4].split(",")[j];
+                                shiftPosition2 = split1[j];
+                                shiftTime2 = split2[j];
 
                             /*if(!csv[i + 6].split(",")[j].equals(".") &&
                                     !startsWithNumber(csv[i + 6].split(",")[j]) &&
@@ -339,15 +342,16 @@ public class BJsWholesaleScheduler
                                 //Get the third shift time is it exists
                                 shiftTime3 = csv[i + 7].split(",")[j];
                             }*/
-                        }
-                        else if(!csv[i + 4].split(",")[j].equals(".") &&
-                                !startsWithNumber(csv[i + 4].split(",")[j]) &&
-                                !csv[i + 4].startsWith("\""))
-                        {
-                            multiplier = true;
+                            }
+                            else if(!split2[j].equals(".") &&
+                                    !startsWithNumber(split2[j]) &&
+                                    !csv[i + 4].startsWith("\""))
+                            {
+                                multiplier = true;
 
-                            shiftPosition2 = csv[i + 4].split(",")[j];
-                            shiftTime2 = csv[i + 5].split(",")[j];
+                                shiftPosition2 = split2[j];
+                                shiftTime2 = csv[i + 5].split(",")[j];
+                            }
                         }
 
                         //Determine if there was a second shift
