@@ -41,7 +41,7 @@ public class BJsWholesaleScheduler
     public static final InputStream BACKUP_EMAIL_FILE = BJsWholesaleScheduler.class.getResourceAsStream("res/emails.txt");
 
     //Front-line schedule template
-    private static final String FRONT_LINE_TEMPLATE = "res/frontLineTemplate02.xls";
+    private static final String FRONT_LINE_TEMPLATE = "res/frontLineTemplate03.xls";
     private static final String CASHIER_TEMPLATE = "res/cashierTemplate.xls";
     private static final String OVERNIGHT_TEMPLATE = "res/overnightTemplate.xls";
 
@@ -718,7 +718,7 @@ public class BJsWholesaleScheduler
     {
         displayFrontLineShifts("Supv", day, myArray, rows, cols, frontLineSchedule);
 
-        displayFrontLineShifts("Selfcheck Attendant", day, myArray, rows, cols, frontLineSchedule);
+        displayFrontLineShifts("Selfcheck Attendant, Scan & Pan", day, myArray, rows, cols, frontLineSchedule);
 
         displayFrontLineShifts("Member Services", day, myArray, rows, cols, frontLineSchedule);
 
@@ -758,10 +758,6 @@ public class BJsWholesaleScheduler
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
-
-//        displayFrontLineShifts("Stock Clerk", day, recoveryPartition, rows, cols, frontLineSchedule);
-//
-//        displayFrontLineShifts("Ticketer", day, recoveryPartition, rows, cols, frontLineSchedule);
 
         displayFrontLineShifts("Recovery", day, recoveryPartition, rows, cols, frontLineSchedule);
 
@@ -894,7 +890,7 @@ public class BJsWholesaleScheduler
                 //Only display the shifts that share the correct day, position, and are not null and
                 //the end time of the shift is past 9:00am
                 if(myArray[x][y] != null && myArray[x][y].day.equals(day)
-                        && myArray[x][y].position.contains(position)
+                        && (position.contains(myArray[x][y].position) || myArray[x][y].position.contains(position))
                         && getMilitaryTime(myArray[x][y].endTime) > 900)
                 {
                     boolean recovery = myArray[x][y].position.contains("Recovery") || myArray[x][y].position.contains("Ticketer") ||
@@ -911,9 +907,9 @@ public class BJsWholesaleScheduler
                         excelCol = 0;
                         excelRow = 4;
                     }
-                    else if(myArray[x][y].position.contains("Selfcheck Attendant"))
-                    {
-                        //Start at cell A13
+                    else if(myArray[x][y].position.contains("Selfcheck Attendant") || myArray[x][y].position.contains("Scan & Pan"))
+                    {	
+                    	//Start at cell A13
                         excelCol = 0;
                         excelRow = 12; //12
                     }
@@ -986,14 +982,21 @@ public class BJsWholesaleScheduler
                     //End switch
 
                     initRow = excelRow;
+                    
+                    String name = myArray[x][y].getName();
+                	
+                	// Make employee special if the employee falls into a category with various shifts, i.e., Scan & Pan
+                	if(myArray[x][y].position.contains("Scan & Pan")) {
+                		name = "* " + name;
+                	}
 
                     //Traverse excel template and fill name and time only if there is not already a name and time there
                     while(excelRow < initRow + offset || recovery) //Originally initRow + 6
-                    {
+                    {	
                         if(frontLineSchedule.isEmptyCell(excelCol, excelRow))
-                        {
+                        {	
                             //Write the employees name to the ExcelWriter
-                            frontLineSchedule.overwriteEmptyCell(excelCol, excelRow, myArray[x][y].getName(), 1);
+                            frontLineSchedule.overwriteEmptyCell(excelCol, excelRow, name, 1);
 
                             //Write that employees shift time next to the employee's name
                             frontLineSchedule.overwriteEmptyCell(excelCol + 1, excelRow, myArray[x][y].getShiftTime(), 2);
@@ -1015,7 +1018,7 @@ public class BJsWholesaleScheduler
                         frontLineSchedule.insertRow(excelRow);
 
                         //Write the employees name to the ExcelWriter
-                        frontLineSchedule.overwriteEmptyCell(excelCol, excelRow, myArray[x][y].getName(), 1);
+                        frontLineSchedule.overwriteEmptyCell(excelCol, excelRow, name, 1);
 
                         //Write that employees shift time next to the employee's name
                         frontLineSchedule.overwriteEmptyCell(excelCol + 1, excelRow, myArray[x][y].getShiftTime(), 2);

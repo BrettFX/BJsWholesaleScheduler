@@ -155,6 +155,12 @@ public class Shift
 	{
 		return employee.split(",")[1].trim() + " " + employee.split(",")[0].trim();
 	}
+	
+	/**Prepends an asterisk to the name to indicate special*/
+	public String getSpecialCaseName() {
+		String name = employee.split(",")[1].trim() + " " + employee.split(",")[0].trim().charAt(0);
+		return "* " + name;
+	}
 
 	@Override
 	public String toString() 

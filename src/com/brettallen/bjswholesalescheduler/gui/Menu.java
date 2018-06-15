@@ -30,7 +30,7 @@ import jxl.write.biff.RowsExceededException;
 public class Menu extends JFrame implements ActionListener
 {
     private static final long serialVersionUID = 1L;
-    private static final String VERSION = "4.5.8";
+    private static final String VERSION = "4.5.9";
 
     //Toggle this on for a better debugging experience (Don't have to open a file to test button events)
     private static final boolean DEBUG = false;

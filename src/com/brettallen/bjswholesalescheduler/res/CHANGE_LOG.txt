@@ -1,4 +1,9 @@
-4.5.8 (Release Date:)
+4.5.9 (Release Date: 06-15-2018)
+- Adjusted frontline schedule excel template to include new "Scan & Pan" shift inline with "Selfcheck Attendant".
+- Refactored function to display frontline shifts such that employee's with "Scan & Pan" shift will receive an asterisk (*) prepended
+  to their name.
+
+4.5.8 (Release Date: 01-04-2017)
 - Refactored a lot of what was going to be released with 4.5.7
 - Took out Jewelry node since it is no longer a possible shift
 - Hiding components that will be implemented in a future update
@@ -17,7 +22,7 @@
 - Add ability to send only the PDF schedule to employees (STILL NEEDS FIXED)
 - Original method now notifies the user that the picture format and PDF format will be sent to the employees (STILL NEEDS FIXED)
 
-4.5.6 (Released: Wednesday, 11-23-16):
+4.5.6 (Released: Wednesday, 11-23-2016):
 - Fixed a bug with printing managers to the cashier schedule where specific shift times could not be handled
     * Can now handle specific shift times (ones that have numbers)
 		
