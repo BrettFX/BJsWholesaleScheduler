@@ -718,7 +718,7 @@ public class BJsWholesaleScheduler
     {
         displayFrontLineShifts("Supv", day, myArray, rows, cols, frontLineSchedule);
 
-        displayFrontLineShifts("Selfcheck Attendant, Scan & Pan", day, myArray, rows, cols, frontLineSchedule);
+        displayFrontLineShifts("Selfcheck Attendant, Scan & Pan, Self Service Attend", day, myArray, rows, cols, frontLineSchedule);
 
         displayFrontLineShifts("Member Services", day, myArray, rows, cols, frontLineSchedule);
 
@@ -907,7 +907,8 @@ public class BJsWholesaleScheduler
                         excelCol = 0;
                         excelRow = 4;
                     }
-                    else if(myArray[x][y].position.contains("Selfcheck Attendant") || myArray[x][y].position.contains("Scan & Pan"))
+                    else if(myArray[x][y].position.contains("Selfcheck Attendant") || myArray[x][y].position.contains("Scan & Pan")
+                    		|| myArray[x][y].position.contains("Self Service Attend"))
                     {	
                     	//Start at cell A13
                         excelCol = 0;
